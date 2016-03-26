@@ -11,6 +11,9 @@ build-armv7: download
 	docker push linkerlab/rpi-node:$(ARMV7_VER)-armv7l
 
 download:
+ifeq (, $(wildcard ./src))
+	@mkdir src
+endif
 ifeq (, $(wildcard ./src/$(ARMV7_SRC).tar.xz))
 	@echo "src file not exist, start to download..."
 	@curl $(ARMV7_URL) -o src/$(ARMV7_SRC).tar.xz
